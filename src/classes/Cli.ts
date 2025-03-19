@@ -154,6 +154,8 @@ class Cli {
           topSpeed: string;
           towingCapacity: string;
         }) => {
+          const wheels = [new Wheel(), new Wheel(), new Wheel(), new Wheel()];
+
           const truck = new Truck(
             Cli.generateVin(),
             answers.color,
@@ -162,7 +164,8 @@ class Cli {
             parseInt(answers.year),
             parseInt(answers.weight),
             parseInt(answers.topSpeed),
-            parseInt(answers.towingCapacity)
+            wheels, // Pass the wheels array here
+            parseInt(answers.towingCapacity) // Pass the towing capacity
           );
           this.vehicles.push(truck);
           this.selectedVehicleVin = truck.vin;
@@ -214,6 +217,19 @@ class Cli {
           rearWheelDiameter: string;
           rearWheelBrand: string;
         }) => {
+          // Create an array of Wheel objects for the motorbike
+          const wheels = [
+            new Wheel(
+              parseInt(answers.frontWheelDiameter),
+              answers.frontWheelBrand
+            ), // Create front wheel
+            new Wheel(
+              parseInt(answers.rearWheelDiameter),
+              answers.rearWheelBrand
+            ), // Create rear wheel
+          ];
+
+          // Instantiate the Motorbike
           const motorbike = new Motorbike(
             Cli.generateVin(),
             answers.color,
@@ -222,10 +238,7 @@ class Cli {
             parseInt(answers.year),
             parseInt(answers.weight),
             parseInt(answers.topSpeed),
-            parseInt(answers.frontWheelDiameter),
-            answers.frontWheelBrand,
-            parseInt(answers.rearWheelDiameter),
-            answers.rearWheelBrand
+            wheels // Pass the wheels array here
           );
           this.vehicles.push(motorbike);
           this.selectedVehicleVin = motorbike.vin;
